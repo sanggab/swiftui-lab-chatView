@@ -14,6 +14,7 @@
 		EF0C24682C45083B00A5994B /* swiftui_lab_chatViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0C24672C45083B00A5994B /* swiftui_lab_chatViewTests.swift */; };
 		EF0C24722C45083B00A5994B /* swiftui_lab_chatViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0C24712C45083B00A5994B /* swiftui_lab_chatViewUITests.swift */; };
 		EF0C24742C45083B00A5994B /* swiftui_lab_chatViewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0C24732C45083B00A5994B /* swiftui_lab_chatViewUITestsLaunchTests.swift */; };
+		EFCD840A2C450F1300C3ADDE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCD84092C450F1300C3ADDE /* ChatView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		EF0C246D2C45083B00A5994B /* swiftui-lab-chatViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "swiftui-lab-chatViewUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF0C24712C45083B00A5994B /* swiftui_lab_chatViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_lab_chatViewUITests.swift; sourceTree = "<group>"; };
 		EF0C24732C45083B00A5994B /* swiftui_lab_chatViewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_lab_chatViewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		EFCD84092C450F1300C3ADDE /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				EF0C24562C45083900A5994B /* swiftui_lab_chatViewApp.swift */,
 				EF0C24582C45083900A5994B /* ContentView.swift */,
+				EFCD84092C450F1300C3ADDE /* ChatView.swift */,
 				EF0C245A2C45083A00A5994B /* Assets.xcassets */,
 				EF0C245C2C45083A00A5994B /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF0C24592C45083900A5994B /* ContentView.swift in Sources */,
+				EFCD840A2C450F1300C3ADDE /* ChatView.swift in Sources */,
 				EF0C24572C45083900A5994B /* swiftui_lab_chatViewApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
