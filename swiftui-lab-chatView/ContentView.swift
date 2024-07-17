@@ -8,16 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    var list: [String] = [
+        "111",
+        "22222",
+        "333",
+//        "44444444",
+//        "555",
+//        "66666",
+//        "77",
+//        "88888888888",
+//        "9999999",
+//        "10101010",
+//        "11 11 11 11",
+//        "12 12 12 12 12 12 12 12"
+    ]
+    
     var body: some View {
-        ChatView {
-            Text("1")
-                .background(.mint)
-            
-            Text("233")
-                .frame(height: 30)
-                .background(.blue)
+        ChatView(list: list) { element in
+            Text(element)
+                .frame(height: 600)
+                .background(.gray)
         }
-        .background(.pink)
         
 //        ScrollView {
 //            Text("1")

@@ -7,65 +7,120 @@
 
 import SwiftUI
 
+//struct BoundsPreferenceKey: PreferenceKey {
+//    typealias Bounds = Anchor<CGRect>
+//    static var defaultValue = [Bounds]()
+//
+//    static func reduce(
+//        value: inout [Bounds],
+//        nextValue: () -> [Bounds]
+//    ) {
+//        value.append(contentsOf: nextValue())
+//    }
+//}
+
+//struct CGPointPreferenceKey: PreferenceKey {
+//    typealias Points = Anchor<CGPoint>
+//    static var defaultValue = [Points]()
+//
+//    static func reduce(
+//        value: inout [Points],
+//        nextValue: () -> [Points]
+//    ) {
+//        value.append(contentsOf: nextValue())
+//    }
+//}
+
 struct BoundsPreferenceKey: PreferenceKey {
-    typealias Bounds = Anchor<CGRect>
-    static var defaultValue = [Bounds]()
-
-    static func reduce(
-        value: inout [Bounds],
-        nextValue: () -> [Bounds]
-    ) {
-        value.append(contentsOf: nextValue())
-    }
-}
-
-struct CGPointPreferenceKey: PreferenceKey {
-    typealias Points = Anchor<CGPoint>
-    static var defaultValue = [Points]()
-
-    static func reduce(
-        value: inout [Points],
-        nextValue: () -> [Points]
-    ) {
-        value.append(contentsOf: nextValue())
-    }
-}
-
-struct ChatView<Content: View>: View {
+    typealias Value = [Int: Anchor<CGRect>]
     
-    @ViewBuilder var content: () -> Content
+    static var defaultValue: Value {
+        [:]
+    }
+    
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value.merge(nextValue()) { $1 }
+    }
+}
+
+struct ChatView<Content: View, Value>: View where Value: Hashable {
+    
+    var list: [Value]
+    @ViewBuilder var content: (Value) -> Content
     
     @State private var boundList: [CGRect] = []
     
+    @State private var contentSize: CGSize = .zero
+    
+    @State private var visibleRange: [Int: Bool] = [:]
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            content()
+            ForEach(Array(list.enumerated()), id: \.element) { index, element in
+                
+                if visibleRange.isEmpty {
+                    content(element)
+                        .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
+                            [index : anchor]
+                        })
+                } else {
+                    
+                    if visibleRange.first(where: { $0.key == index })?.value == true {
+                        let _ = print("show")
+                        content(element)
+                            .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
+                                [index : anchor]
+                            })
+                    } else {
+                        let _ = print("hidden")
+                        content(element)
+                            .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
+                                [index : anchor]
+                            })
+                            .hidden()
+                    }
+                }
+//                    .anchorPreference(key: CGPointPreferenceKey.self, value: ., transform: { anchor in
+//                        [index : anchor]
+//                    })
+            }
         }
+//        .background {
+//            GeometryReader { proxy in
+//                Color.clear
+//                    .onPreferenceChange(BoundsPreferenceKey.self, perform: { value in
+//                        let bounds: [CGRect] = value.map { proxy[$0] }
+//                        print("bounds: \(bounds)")
+//                    })
+//            }
+//        }
+//        .backgroundPreferenceValue(BoundsPreferenceKey.self) { value in
+//            GeometryReader { proxy in
+//                Color.clear
+//                    .onChange(of: value) { newValue in
+//                        let bounds: [CGRect] = newValue.map { proxy[$0] }
+//                        print("bounds: \(bounds)")
+//                    }
+//            }
+//        }
         .backgroundPreferenceValue(BoundsPreferenceKey.self) { value in
             GeometryReader { proxy in
                 Color.clear
-                    .onAppear {
-                        let bounds: [CGRect] = value.map { proxy[$0] }
-                        print("bounds: \(bounds)")
-                        print("bounds count \(bounds.count)")
-                        boundList = bounds
+                    .onChange(of: value) { newValue in
+                        value.forEach { key, value in
+                            let minY = proxy[value].minY
+                            let maxY = proxy[value].maxY
+                            
+                            if minY <= proxy.size.height && maxY >= 0 {
+                                visibleRange.merge([key : true]) { $1 }
+                            } else {
+                                visibleRange.merge([key : false]) { $1 }
+                            }
+                            
+                        }
                     }
             }
         }
-        .background {
-            GeometryReader { proxy in
-                Color.clear
-                    .onAppear {
-                        print("proxy size:  \(proxy.size)")
-                    }
-            }
-        }
-    }
-}
-
-#Preview {
-    ChatView {
-        Text("1")
     }
 }
 
