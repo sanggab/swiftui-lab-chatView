@@ -54,26 +54,32 @@ struct ChatView<Content: View, Value>: View where Value: Hashable {
     
     @State private var visibleRange: [Int: Bool] = [:]
     
+    @Namespace var nameSpace
+    var id: String = "content"
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach(Array(list.enumerated()), id: \.element) { index, element in
                 
                 if visibleRange.isEmpty {
                     content(element)
+                        .id(id)
                         .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                             [index : anchor]
                         })
                 } else {
                     
                     if visibleRange.first(where: { $0.key == index })?.value == true {
-                        let _ = print("show")
+                        
                         content(element)
+                            .id(id)
                             .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                                 [index : anchor]
                             })
                     } else {
-                        let _ = print("hidden")
+                        
                         content(element)
+                            .id(id)
                             .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                                 [index : anchor]
                             })

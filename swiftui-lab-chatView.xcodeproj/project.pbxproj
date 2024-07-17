@@ -15,6 +15,7 @@
 		EF0C24722C45083B00A5994B /* swiftui_lab_chatViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0C24712C45083B00A5994B /* swiftui_lab_chatViewUITests.swift */; };
 		EF0C24742C45083B00A5994B /* swiftui_lab_chatViewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0C24732C45083B00A5994B /* swiftui_lab_chatViewUITestsLaunchTests.swift */; };
 		EFCD840A2C450F1300C3ADDE /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCD84092C450F1300C3ADDE /* ChatView.swift */; };
+		EFCD840D2C47AFF500C3ADDE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EFCD840C2C47AFF500C3ADDE /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFCD840D2C47AFF500C3ADDE /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = "swiftui-lab-chatView";
+			packageProductDependencies = (
+				EFCD840C2C47AFF500C3ADDE /* Kingfisher */,
+			);
 			productName = "swiftui-lab-chatView";
 			productReference = EF0C24532C45083900A5994B /* swiftui-lab-chatView.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +223,9 @@
 				Base,
 			);
 			mainGroup = EF0C244A2C45083900A5994B;
+			packageReferences = (
+				EFCD840B2C47AFF500C3ADDE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = EF0C24542C45083900A5994B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -592,6 +600,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EFCD840B2C47AFF500C3ADDE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EFCD840C2C47AFF500C3ADDE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFCD840B2C47AFF500C3ADDE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF0C244B2C45083900A5994B /* Project object */;
 }
