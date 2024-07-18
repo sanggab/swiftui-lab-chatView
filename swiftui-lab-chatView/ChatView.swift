@@ -62,24 +62,24 @@ struct ChatView<Content: View, Value>: View where Value: Hashable {
             ForEach(Array(list.enumerated()), id: \.element) { index, element in
                 
                 if visibleRange.isEmpty {
+                    
                     content(element)
-                        .id(id)
                         .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                             [index : anchor]
                         })
+                    
                 } else {
                     
                     if visibleRange.first(where: { $0.key == index })?.value == true {
                         
                         content(element)
-                            .id(id)
                             .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                                 [index : anchor]
                             })
-                    } else {
                         
+                    } else {
+                        /// 히든이여도 메모리에선 안날라간다
                         content(element)
-                            .id(id)
                             .anchorPreference(key: BoundsPreferenceKey.self, value: .bounds, transform: { anchor in
                                 [index : anchor]
                             })
